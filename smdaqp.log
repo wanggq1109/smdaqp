@@ -1,0 +1,60 @@
+[ERROR][2015-09-29 15:19:14,902][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-09-29 16:38:52,350][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-09-30 14:17:08,962][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-09-30 15:28:06,242][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-08 12:52:51,110][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-08 12:55:50,928][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-08 13:05:54,165][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-08 13:10:30,677][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@42b67ef0]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444280763032-b074c17a can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-08 13:26:30,722][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-08 13:34:57,377][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-08 13:39:32,844][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 14:13:07,373][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 14:18:20,666][com.powerlong.controller.AppController]绑定二维码失败:java.lang.NullPointerException
+[ERROR][2015-10-10 14:22:48,484][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@2b9cd666]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444457598045-62e19f59 can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-10 14:22:55,310][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@403647b1]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444457595856-f3c37ad3 can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-10 14:32:06,045][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 14:35:11,882][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@7625a1b6]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444458734751-99e52cd6 can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-10 14:35:11,995][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@34455372]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444458757547-bfa88264 can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-10 14:37:49,743][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 14:42:54,213][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@6e0463c8]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444459077457-18850d9d can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-10 14:42:59,113][org.I0Itec.zkclient.ZkEventThread]Error handling event ZkEvent[New session event sent to kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener@623317e5]
+kafka.common.ConsumerRebalanceFailedException: smdaqp_group_PC201503272206-1444459099549-5ebf7d6b can't rebalance after 4 retries
+	at kafka.consumer.ZookeeperConsumerConnector$ZKRebalancerListener.syncedRebalance(ZookeeperConsumerConnector.scala:633)
+	at kafka.consumer.ZookeeperConsumerConnector$ZKSessionExpireListener.handleNewSession(ZookeeperConsumerConnector.scala:487)
+	at org.I0Itec.zkclient.ZkClient$4.run(ZkClient.java:472)
+	at org.I0Itec.zkclient.ZkEventThread.run(ZkEventThread.java:71)
+[ERROR][2015-10-10 14:49:29,018][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 14:56:39,987][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 17:19:48,066][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR][2015-10-10 17:23:37,462][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
