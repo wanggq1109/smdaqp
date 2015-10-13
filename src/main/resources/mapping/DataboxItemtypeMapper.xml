@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.DataboxItemtypeMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.model.DataboxItemtype" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="MerchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="ITME_TYPE" property="itmeType" jdbcType="VARCHAR" />
+    <result column="ITME_TYPE_NAME" property="itmeTypeName" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MerchantId, ITME_TYPE, ITME_TYPE_NAME, CREATED_DATE, UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from data_box_item_type
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from data_box_item_type
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.powerlong.model.DataboxItemtype" >
+    insert into data_box_item_type (ID, MerchantId, ITME_TYPE, 
+      ITME_TYPE_NAME, CREATED_DATE, UPDATED_DATE
+      )
+    values (#{id,jdbcType=BIGINT}, #{merchantid,jdbcType=VARCHAR}, #{itmeType,jdbcType=VARCHAR}, 
+      #{itmeTypeName,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerlong.model.DataboxItemtype" >
+    insert into data_box_item_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="merchantid != null" >
+        MerchantId,
+      </if>
+      <if test="itmeType != null" >
+        ITME_TYPE,
+      </if>
+      <if test="itmeTypeName != null" >
+        ITME_TYPE_NAME,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="itmeType != null" >
+        #{itmeType,jdbcType=VARCHAR},
+      </if>
+      <if test="itmeTypeName != null" >
+        #{itmeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.DataboxItemtype" >
+    update data_box_item_type
+    <set >
+      <if test="merchantid != null" >
+        MerchantId = #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="itmeType != null" >
+        ITME_TYPE = #{itmeType,jdbcType=VARCHAR},
+      </if>
+      <if test="itmeTypeName != null" >
+        ITME_TYPE_NAME = #{itmeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerlong.model.DataboxItemtype" >
+    update data_box_item_type
+    set MerchantId = #{merchantid,jdbcType=VARCHAR},
+      ITME_TYPE = #{itmeType,jdbcType=VARCHAR},
+      ITME_TYPE_NAME = #{itmeTypeName,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+    <resultMap id="BaseResultDataBoxTypeMap" type="com.powerlong.vo.DataBoxItemTypeDataVo" >
+        <id column="amount" property="amount" jdbcType="DOUBLE" />
+        <result column="ITME_TYPE_NAME" property="itemTypeName" jdbcType="VARCHAR" />
+        <result column="MERCHANTNAME" property="merchantname" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 获取当月数据消费次数和消费总金额 selectDataBoxToMonthTypeByUserId -->
+    <select id="selectDataBoxToMonthTypeByUserId" resultMap="BaseResultDataBoxTypeMap" parameterType="java.lang.String" >
+        SELECT
+        sum(DISTINCT tr.TotalAmount) as amount ,
+        dbit.ITME_TYPE_NAME as itemTypeName
+        FROM
+        data_box_item_type dbit,
+        databox_user du,
+        t_receipt tr
+        WHERE
+        dbit.MerchantId = tr.MerchantId
+        AND tr.QRCode = du.QRCODE
+        AND du.MOBILE= #{mobile,jdbcType=VARCHAR}
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(now(), '%Y-%m')
+        GROUP BY
+        dbit.ITME_TYPE
+    </select>
+
+    <!-- 获取当月店铺数据消费消费人群年龄比例 selectDataBoxToMonthAgeTypeByMerchantId -->
+    <select id="selectDataBoxToMonthAgeTypeByMerchantId" resultMap="BaseResultMap" parameterType="com.powerlong.vo.DataBoxItemTypeDataVo" >
+        SELECT
+        count(us.mobile) as id,
+        CASE
+        WHEN <![CDATA[ us.age  <= 20 ]]> THEN
+        "15-20"
+        WHEN <![CDATA[ 20 < us.age
+            AND us.age <= 30 ]]>  THEN
+        "20"
+        WHEN <![CDATA[ 30 < us.age
+            AND us.age <= 40]]> THEN
+        "30"
+        WHEN <![CDATA[40 < us.age
+            AND us.age <= 50 ]]> THEN
+        "40"
+        WHEN <![CDATA[ 50 < us.age
+            AND us.age <= 60 ]]> THEN
+        "50"
+        WHEN <![CDATA[ 60 < us.age
+            AND us.age <= 70 ]]> THEN
+        "60"
+        WHEN <![CDATA[ 70 < us.age
+            AND us.age <= 80 ]]> THEN
+        "70"
+        END AS ITME_TYPE
+        FROM
+        (
+        SELECT
+        du.mobile as mobile,
+        DATE_FORMAT(
+        FROM_DAYS(
+        TO_DAYS(NOW()) - TO_DAYS(du.BIRTHDAY)
+        ),
+        '%Y'
+        ) + 0 AS age
+        FROM
+        databox_user du,
+        t_receipt tr
+        WHERE
+        tr.QRCode = du.QRCODE
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        <if test="merchantid != null" >
+            AND tr.MerchantId = #{merchantid,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null" >
+            AND du.mall_id= #{id,jdbcType=BIGINT}
+        </if>
+        ) AS us
+        GROUP BY
+        ITME_TYPE
+    </select>
+
+    <!-- 获取当月用户消费次数 selectDataBoxToMonthCountPayByUser -->
+    <select id="selectDataBoxToMonthCountPayByUser" resultType="java.lang.Long" parameterType="java.lang.String" >
+        SELECT
+        count(du.QRCODE)
+        FROM
+        databox_user du,
+        t_receipt tr
+        WHERE
+        tr.QRCode = du.QRCODE
+        AND du.MOBILE= #{mobile,jdbcType=VARCHAR}
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(now(), '%Y-%m')
+    </select>
+
+
+    <!-- 获取当月店铺数据消费消费人群年龄列表 selectDataBoxToMonthAgeList -->
+    <select id="selectDataBoxToMonthAgeList" resultMap="BaseResultMap" parameterType="com.powerlong.vo.DataBoxItemTypeDataVo" >
+        select  dd.ID,
+        DATE_FORMAT(dd.CreateTime, "%Y") AS MerchantId,
+        DATE_FORMAT(dd.CreateTime, "%m") AS ITME_TYPE,
+        DATE_FORMAT(dd.CreateTime, "%d") AS ITME_TYPE_NAME
+        from (
+        SELECT
+        count(DISTINCT tr.ID) as Id,
+        DATE_FORMAT(
+        FROM_DAYS(
+        TO_DAYS(NOW()) - TO_DAYS(du.BIRTHDAY)
+        ),
+        '%Y'
+        ) + 0 AS age,
+        tr.CreateTime
+        FROM
+        databox_user du,
+        t_receipt tr
+        WHERE
+        tr.QRCode = du.QRCODE
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY date_format(tr.CreateTime, '%Y-%m-%d') ) as dd where dd.age <![CDATA[ >= ]]>  #{id,jdbcType=BIGINT} AND dd.age <![CDATA[ < ]]> #{id,jdbcType=BIGINT} + 10
+    </select>
+
+
+</mapper>

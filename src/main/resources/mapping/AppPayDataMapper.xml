@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.AppPayDataMapper" >
+    <resultMap id="BaseResultMap" type="com.powerlong.model.AppPayData" >
+        <id column="ID" property="id" jdbcType="BIGINT" />
+        <result column="MerchantId" property="merchantid" jdbcType="VARCHAR" />
+        <result column="MERCHANTNAME" property="merchantname" jdbcType="VARCHAR" />
+        <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="AMOUNT" property="amount" jdbcType="DOUBLE" />
+        <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+        <result column="MALL_ID" property="mallId" jdbcType="BIGINT" />
+        <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        ID, MerchantId, MERCHANTNAME, CREATED_DATE, AMOUNT, PAY_TIME, MALL_ID, MALL_NAME
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from app_pay_data
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from app_pay_data
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.powerlong.model.AppPayData" >
+        insert into app_pay_data (ID, MerchantId, MERCHANTNAME,
+        CREATED_DATE, AMOUNT, PAY_TIME,
+        MALL_ID, MALL_NAME)
+        values (#{id,jdbcType=BIGINT}, #{merchantid,jdbcType=VARCHAR}, #{merchantname,jdbcType=VARCHAR},
+        #{createdDate,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE}, #{payTime,jdbcType=TIMESTAMP},
+        #{mallId,jdbcType=BIGINT}, #{mallName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.powerlong.model.AppPayData" >
+        insert into app_pay_data
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="merchantid != null" >
+                MerchantId,
+            </if>
+            <if test="merchantname != null" >
+                MERCHANTNAME,
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE,
+            </if>
+            <if test="amount != null" >
+                AMOUNT,
+            </if>
+            <if test="payTime != null" >
+                PAY_TIME,
+            </if>
+            <if test="mallId != null" >
+                MALL_ID,
+            </if>
+            <if test="mallName != null" >
+                MALL_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="merchantid != null" >
+                #{merchantid,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantname != null" >
+                #{merchantname,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null" >
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="amount != null" >
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="payTime != null" >
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mallId != null" >
+                #{mallId,jdbcType=BIGINT},
+            </if>
+            <if test="mallName != null" >
+                #{mallName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.AppPayData" >
+        update app_pay_data
+        <set >
+            <if test="merchantid != null" >
+                MerchantId = #{merchantid,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantname != null" >
+                MERCHANTNAME = #{merchantname,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="amount != null" >
+                AMOUNT = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="payTime != null" >
+                PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mallId != null" >
+                MALL_ID = #{mallId,jdbcType=BIGINT},
+            </if>
+            <if test="mallName != null" >
+                MALL_NAME = #{mallName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.powerlong.model.AppPayData" >
+        update app_pay_data
+        set MerchantId = #{merchantid,jdbcType=VARCHAR},
+        MERCHANTNAME = #{merchantname,jdbcType=VARCHAR},
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+        AMOUNT = #{amount,jdbcType=DOUBLE},
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+        MALL_ID = #{mallId,jdbcType=BIGINT},
+        MALL_NAME = #{mallName,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 获取线上商户当月销售总数 -->
+    <select id="selectMerchantPayAmountByMerchantId" resultType="com.powerlong.model.AppPayData" parameterType="com.powerlong.model.AppPayData" >
+        SELECT
+        SUM(t.AMOUNT) as AMOUNT
+        FROM
+        app_pay_data t
+        WHERE
+        date_format(t.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        <if test="mallId != null" >
+            AND MALL_ID = #{mallId,jdbcType=BIGINT}
+        </if>
+        <if test="merchantid != null" >
+            AND MerchantId = #{merchantid,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <!-- 获取线上广场当天销售总数 -->
+    <select id="selectMallPayAmountByMerchantId" resultType="com.powerlong.model.AppPayData" parameterType="com.powerlong.model.AppPayData" >
+        SELECT
+        SUM(t.AMOUNT) as AMOUNT
+        FROM
+        app_pay_data t
+        WHERE
+        t.MALL_ID = {mallId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')
+    </select>
+
+    <!-- 获取线上广场当月销售总数 -->
+    <select id="selectMallMonthPaySumByMallId" resultMap="BaseResultMap" parameterType="com.powerlong.model.AppPayData" >
+        SELECT
+        sum(t.AMOUNT)/10000 as AMOUNT,
+        DATE_FORMAT(t.CREATED_DATE, "%Y") AS MERCHANTNAME,
+        DATE_FORMAT(t.CREATED_DATE, "%m") AS MALL_NAME,
+        DATE_FORMAT(t.CREATED_DATE, "%d") AS MerchantId
+        FROM
+        app_pay_data t
+        WHERE
+        t.MALL_ID = #{mallId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        GROUP BY
+        DATE_FORMAT(t.CREATED_DATE, '%Y-%m-%d')
+    </select>
+
+
+</mapper>

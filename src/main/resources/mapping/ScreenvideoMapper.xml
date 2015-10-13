@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.ScreenvideoMapper" >
+    <resultMap id="BaseResultMap" type="com.powerlong.model.Screenvideo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="touchId" property="touchid" jdbcType="VARCHAR" />
+        <result column="clickTime" property="clicktime" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="mallId" property="mallid" jdbcType="VARCHAR" />
+        <result column="mallName" property="mallname" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="screenVideoMap" type="com.powerlong.vo.ScreenVideoVo" >
+        <result column="cnt" property="cnt" jdbcType="VARCHAR" />
+        <result column="daycnt" property="daycnt" jdbcType="VARCHAR" />
+        <result column="weekcnt" property="weekcnt" jdbcType="VARCHAR" />       
+    </resultMap>
+    
+    <resultMap id="screenVideoListMap" type="com.powerlong.vo.ScreenVideoDataVo" >
+        <result column="cnt" property="cnt" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />  
+        <result column="url" property="url" jdbcType="VARCHAR" />     
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        id, content, touchId, clickTime, url, createTime, mobile, mallId, mallName
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from t_screenvideo
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_screenvideo
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.powerlong.model.Screenvideo" >
+        insert into t_screenvideo (id, content, touchId,
+        clickTime, url, createTime,
+        mobile, mallId, mallName
+        )
+        values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{touchid,jdbcType=VARCHAR},
+        #{clicktime,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+        #{mobile,jdbcType=VARCHAR}, #{mallid,jdbcType=VARCHAR}, #{mallname,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.powerlong.model.Screenvideo" >
+        insert into t_screenvideo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="touchid != null" >
+                touchId,
+            </if>
+            <if test="clicktime != null" >
+                clickTime,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+            <if test="createtime != null" >
+                createTime,
+            </if>
+            <if test="mobile != null" >
+                mobile,
+            </if>
+            <if test="mallid != null" >
+                mallId,
+            </if>
+            <if test="mallname != null" >
+                mallName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="touchid != null" >
+                #{touchid,jdbcType=VARCHAR},
+            </if>
+            <if test="clicktime != null" >
+                #{clicktime,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="mallid != null" >
+                #{mallid,jdbcType=VARCHAR},
+            </if>
+            <if test="mallname != null" >
+                #{mallname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.Screenvideo" >
+        update t_screenvideo
+        <set >
+            <if test="content != null" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="touchid != null" >
+                touchId = #{touchid,jdbcType=VARCHAR},
+            </if>
+            <if test="clicktime != null" >
+                clickTime = #{clicktime,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mobile != null" >
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="mallid != null" >
+                mallId = #{mallid,jdbcType=VARCHAR},
+            </if>
+            <if test="mallname != null" >
+                mallName = #{mallname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.powerlong.model.Screenvideo" >
+    update t_screenvideo
+    set content = #{content,jdbcType=VARCHAR},
+      touchId = #{touchid,jdbcType=VARCHAR},
+      clickTime = #{clicktime,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mallId = #{mallid,jdbcType=VARCHAR},
+      mallName = #{mallname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 获取到视屏用户点击了那些内容 -->
+    <select id="selectContentByUserMobile" resultMap="BaseResultMap" parameterType="com.powerlong.model.Screenvideo" >
+        SELECT
+        t.content
+        FROM
+        t_screenvideo t
+        WHERE
+        t.mobile =  #{mobile,jdbcType=VARCHAR}
+        AND date_format(t.clickTime, '%Y-%m') = date_format(now(), '%Y-%m')
+        GROUP BY
+        t.content
+    </select>
+
+    <!-- 获取到视屏用户每天点击了那些内容次数 -->
+    <select id="selectContentCountByUserMobile" resultMap="BaseResultMap" parameterType="com.powerlong.model.Screenvideo" >
+        SELECT
+            count(*) as id,
+            DATE_FORMAT(t.clickTime,"%Y") as touchId,
+            DATE_FORMAT(t.clickTime,"%m") as url,
+            DATE_FORMAT(t.clickTime,"%d") as mobile
+        FROM
+            t_screenvideo t
+        WHERE
+            t.mobile = #{mobile,jdbcType=VARCHAR}
+        AND t.content = #{content,jdbcType=VARCHAR}
+        AND date_format(t.clickTime, '%Y-%m') = date_format(now(), '%Y-%m')
+        GROUP BY
+            DATE_FORMAT(t.clickTime, "%Y-%m-%d")
+    </select>
+
+ 	<select id="selectContentGroupBy" resultMap="screenVideoMap" parameterType="com.powerlong.vo.ScreenVideoVo" >
+        SELECT cnt.cnt as cnt,daycnt.cnt as daycnt,weekcnt.cnt as weekcnt
+		from (SELECT count(*) as cnt FROM t_screenvideo t WHERE t.content like CONCAT('%','${content}','%' ) 
+			and  date_format(t.clickTime, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d'))	AS daycnt,	
+		(SELECT count(*) as  cnt FROM t_screenvideo t WHERE t.content like CONCAT('%','${content}','%' ) 
+			and  date_format(t.clickTime, '%Y-%m') = date_format(now(), '%Y-%m')) as weekcnt,
+        (SELECT count(*) as cnt FROM t_screenvideo t WHERE t.content like CONCAT('%','${content}','%' ) 
+			and  date_format(t.clickTime, '%Y') = date_format(now(), '%Y')) as cnt
+			
+    </select>
+	
+	<select id="selectContentGroupByList" resultMap="screenVideoListMap" parameterType="com.powerlong.vo.ScreenVideoVo" >
+		SELECT count(*) as cnt, t.content FROM t_screenvideo t WHERE t.content like CONCAT('%','${content}','%' )  GROUP BY t.content
+		order by cnt desc
+					
+    </select>
+
+    <select id="selectSplusScreenDataCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+        select
+        COUNT(ID)
+        FROM t_screenvideo
+        where 1=1
+        <if test="params.mallid != null" >
+            AND mallId = #{params.mallid,jdbcType=VARCHAR}
+        </if>
+        <if test="params.mobile != null" >
+            AND mobile like CONCAT('%',#{params.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.startTime != null" >
+            <![CDATA[
+            AND createTime >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND createTime <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+    </select>
+
+    <!-- 分页查询 selectSplusrScreenData -->
+    <select id="selectSplusrScreenData" resultMap="BaseResultMap" parameterType="com.powerlong.common.Paginator" >
+        select
+        <include refid="Base_Column_List" />
+        FROM t_screenvideo
+        where 1=1
+        <if test="params.mallid != null" >
+            AND mallId = #{params.mallid,jdbcType=VARCHAR}
+        </if>
+        <if test="params.mobile != null" >
+            AND mobile like CONCAT('%',#{params.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.startTime != null" >
+            <![CDATA[
+            AND createTime >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND createTime <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        ORDER BY createTime DESC
+        limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+    </select>
+    <!--滚动屏临时需求方法-->
+    <select id="selectInfoStreamList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_screenvideo
+        ORDER BY createTime DESC limit 2
+    </select>
+	<select id="selectGroupByList" resultMap="screenVideoListMap" parameterType="com.powerlong.model.Screenvideo" >
+		SELECT count(*) as cnt, t.content,t.url FROM t_screenvideo t WHERE 1=1 
+		and date_format(t.clickTime, '%Y-%m-%d') = date_format(#{clicktime,jdbcType=VARCHAR}, '%Y-%m-%d')
+		 <if test="touchid != null and touchid !=''"  >
+            and t.touchId = #{touchid,jdbcType=VARCHAR} 
+        </if>		
+		GROUP BY t.content
+		order by cnt desc					
+    </select>
+</mapper>

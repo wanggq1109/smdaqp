@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.TrafficShopMapper" >
+    <resultMap id="BaseResultMap" type="com.powerlong.model.TrafficShop" >
+        <id column="ID" property="id" jdbcType="BIGINT" />
+        <result column="TRAFFIC_MALL_ID" property="trafficMallId" jdbcType="BIGINT" />
+        <result column="SHOP_ID" property="shopId" jdbcType="VARCHAR" />
+        <result column="SHOP_NAME" property="shopName" jdbcType="VARCHAR" />
+        <result column="FLOOR" property="floor" jdbcType="VARCHAR" />
+        <result column="SERVICEATTITUDE" property="serviceattitude" jdbcType="VARCHAR" />
+        <result column="ENTERINGSHOPNUMBER" property="enteringshopnumber" jdbcType="BIGINT" />
+        <result column="CONSUMEAMOUNT" property="consumeamount" jdbcType="BIGINT" />
+        <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+        <result column="ENTER_TIME" property="enterTime" jdbcType="TIMESTAMP" />
+        <result column="LEAVE_TIME" property="leaveTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        ID, TRAFFIC_MALL_ID, SHOP_ID, SHOP_NAME, FLOOR, SERVICEATTITUDE, ENTERINGSHOPNUMBER,
+        CONSUMEAMOUNT, CREATED_DATE, UPDATED_DATE, MOBILE, ENTER_TIME, LEAVE_TIME
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from traffic_shop
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from traffic_shop
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.powerlong.model.TrafficShop" >
+        insert into traffic_shop (ID, TRAFFIC_MALL_ID, SHOP_ID,
+        SHOP_NAME, FLOOR, SERVICEATTITUDE,
+        ENTERINGSHOPNUMBER, CONSUMEAMOUNT, CREATED_DATE,
+        UPDATED_DATE, MOBILE, ENTER_TIME,
+        LEAVE_TIME)
+        values (#{id,jdbcType=BIGINT}, #{trafficMallId,jdbcType=BIGINT}, #{shopId,jdbcType=VARCHAR},
+        #{shopName,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, #{serviceattitude,jdbcType=VARCHAR},
+        #{enteringshopnumber,jdbcType=BIGINT}, #{consumeamount,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP},
+        #{updatedDate,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR}, #{enterTime,jdbcType=TIMESTAMP},
+        #{leaveTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.powerlong.model.TrafficShop" >
+        insert into traffic_shop
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="trafficMallId != null" >
+                TRAFFIC_MALL_ID,
+            </if>
+            <if test="shopId != null" >
+                SHOP_ID,
+            </if>
+            <if test="shopName != null" >
+                SHOP_NAME,
+            </if>
+            <if test="floor != null" >
+                FLOOR,
+            </if>
+            <if test="serviceattitude != null" >
+                SERVICEATTITUDE,
+            </if>
+            <if test="enteringshopnumber != null" >
+                ENTERINGSHOPNUMBER,
+            </if>
+            <if test="consumeamount != null" >
+                CONSUMEAMOUNT,
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE,
+            </if>
+            <if test="updatedDate != null" >
+                UPDATED_DATE,
+            </if>
+            <if test="mobile != null" >
+                MOBILE,
+            </if>
+            <if test="enterTime != null" >
+                ENTER_TIME,
+            </if>
+            <if test="leaveTime != null" >
+                LEAVE_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="trafficMallId != null" >
+                #{trafficMallId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                #{shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null" >
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null" >
+                #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceattitude != null" >
+                #{serviceattitude,jdbcType=VARCHAR},
+            </if>
+            <if test="enteringshopnumber != null" >
+                #{enteringshopnumber,jdbcType=BIGINT},
+            </if>
+            <if test="consumeamount != null" >
+                #{consumeamount,jdbcType=BIGINT},
+            </if>
+            <if test="createdDate != null" >
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedDate != null" >
+                #{updatedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="enterTime != null" >
+                #{enterTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null" >
+                #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.TrafficShop" >
+        update traffic_shop
+        <set >
+            <if test="trafficMallId != null" >
+                TRAFFIC_MALL_ID = #{trafficMallId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                SHOP_ID = #{shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null" >
+                SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null" >
+                FLOOR = #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceattitude != null" >
+                SERVICEATTITUDE = #{serviceattitude,jdbcType=VARCHAR},
+            </if>
+            <if test="enteringshopnumber != null" >
+                ENTERINGSHOPNUMBER = #{enteringshopnumber,jdbcType=BIGINT},
+            </if>
+            <if test="consumeamount != null" >
+                CONSUMEAMOUNT = #{consumeamount,jdbcType=BIGINT},
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedDate != null" >
+                UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mobile != null" >
+                MOBILE = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="enterTime != null" >
+                ENTER_TIME = #{enterTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null" >
+                LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.powerlong.model.TrafficShop" >
+        update traffic_shop
+        set TRAFFIC_MALL_ID = #{trafficMallId,jdbcType=BIGINT},
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+        SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+        FLOOR = #{floor,jdbcType=VARCHAR},
+        SERVICEATTITUDE = #{serviceattitude,jdbcType=VARCHAR},
+        ENTERINGSHOPNUMBER = #{enteringshopnumber,jdbcType=BIGINT},
+        CONSUMEAMOUNT = #{consumeamount,jdbcType=BIGINT},
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+        UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+        ENTER_TIME = #{enterTime,jdbcType=TIMESTAMP},
+        LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 获取店铺客流信息 -->
+    <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.powerlong.model.TrafficShop" >
+        select
+        <include refid="Base_Column_List" />
+        from traffic_shop
+        where 1=1
+        <if test="id != null">
+            AND ID = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="trafficMallId != null" >
+            AND TRAFFIC_MALL_ID = #{trafficMallId,jdbcType=BIGINT}
+        </if>
+        <if test="shopId != null" >
+            AND SHOP_ID = #{shopId,jdbcType=VARCHAR}
+        </if>
+        <if test="shopName != null" >
+            AND SHOP_NAME = #{shopName,jdbcType=VARCHAR}
+        </if>
+        <if test="floor != null" >
+            AND FLOOR = #{floor,jdbcType=VARCHAR}
+        </if>
+        <if test="serviceattitude != null" >
+            AND SERVICEATTITUDE = #{serviceattitude,jdbcType=VARCHAR}
+        </if>
+        <if test="enteringshopnumber != null" >
+            AND ENTERINGSHOPNUMBER = #{enteringshopnumber,jdbcType=BIGINT}
+        </if>
+        <if test="consumeamount != null" >
+            AND CONSUMEAMOUNT = #{consumeamount,jdbcType=BIGINT}
+        </if>
+        <if test="createdDate != null" >
+            AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updatedDate != null" >
+            AND UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP}
+        </if>
+
+    </select>
+
+
+    <!-- 获取店用户去过的店铺信息 -->
+    <select id="selectShopByUser" resultMap="BaseResultMap" parameterType="com.powerlong.model.TrafficShop" >
+        SELECT
+        DISTINCT t.SHOP_NAME,
+        t.SHOP_ID
+        FROM
+        traffic_shop t
+        WHERE
+        t.MOBILE =  #{mobile,jdbcType=VARCHAR}
+        AND
+        date_format(t.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        GROUP BY
+        t.SHOP_ID
+    </select>
+
+    <!-- 获取店用户去过的店铺时间信息 -->
+    <resultMap id="BaseUserShopTimeResultMap" type="com.powerlong.vo.TrafficShopUserTimeVo" >
+        <result column="SHOP_ID" property="shopId" jdbcType="VARCHAR" />
+        <result column="SHOP_NAME" property="shopName" jdbcType="VARCHAR" />
+        <result column="ENTER_TIME" property="enterTime" jdbcType="VARCHAR" />
+        <result column="LEAVE_TIME" property="leaveTime" jdbcType="VARCHAR" />
+        <result column="data_year" property="dataYear" jdbcType="BIGINT" />
+        <result column="data_month" property="dataMonth" jdbcType="BIGINT" />
+        <result column="data_day" property="dataDay" jdbcType="BIGINT" />
+    </resultMap>
+
+    <!-- 获取店用户去过的店铺时间信息 -->
+    <select id="selectShopTimeByUser" resultMap="BaseUserShopTimeResultMap" parameterType="com.powerlong.model.TrafficShop" >
+        SELECT
+	      t.SHOP_NAME as SHOP_NAME,
+          t.SHOP_ID as SHOP_ID,
+          DATE_FORMAT(t.CREATED_DATE,"%Y") as data_year,
+          DATE_FORMAT(t.CREATED_DATE,"%m") as data_month,
+          DATE_FORMAT(t.CREATED_DATE,"%d") as data_day,
+          DATE_FORMAT(t.ENTER_TIME,"%H:%S") as ENTER_TIME,
+          DATE_FORMAT(t.LEAVE_TIME,"%H:%S") as LEAVE_TIME
+        FROM
+            traffic_shop t
+        WHERE
+            t.MOBILE = #{mobile,jdbcType=VARCHAR}
+            AND t.SHOP_ID = #{shopId,jdbcType=BIGINT}
+            AND
+            date_format(t.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+    </select>
+
+    <!-- 获取店铺每天客流信息 -->
+    <select id="selectShopDayUserCountByShopId" resultMap="BaseUserShopTimeResultMap" parameterType="com.powerlong.model.TrafficShop" >
+        SELECT
+            count(t.ID) as SHOP_ID,
+            DATE_FORMAT(t.CREATED_DATE, "%Y") AS data_year,
+            DATE_FORMAT(t.CREATED_DATE, "%m") AS data_month,
+            DATE_FORMAT(t.CREATED_DATE, "%d") AS data_day
+        FROM
+            traffic_shop t
+        WHERE
+            t.SHOP_ID = #{shopId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(#{enterTime,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+            DATE_FORMAT(t.CREATED_DATE, "%Y-%m-%d")
+    </select>
+
+
+    <!-- 获取用户在商场平均停留时间 -->
+    <select id="selectUserMonthAvgTimeByUser" resultType="java.lang.Long" parameterType="com.powerlong.model.TrafficShop" >
+        SELECT
+            round(
+                avg(
+                    round(
+                        (
+                            UNIX_TIMESTAMP(
+                                DATE_FORMAT(
+                                    t.LEAVE_TIME,
+                                    "%Y-%m-%d %H:%s"
+                                )
+                            ) - UNIX_TIMESTAMP(
+                                DATE_FORMAT(
+                                    t.ENTER_TIME,
+                                    "%Y-%m-%d %H:%s"
+                                )
+                            )
+                        ) / 60
+                    )
+                )
+            )
+        FROM
+            traffic_shop t
+        WHERE
+            t.MOBILE = #{mobile,jdbcType=VARCHAR}
+        AND date_format(t.ENTER_TIME, '%Y-%m') = date_format(now(), '%Y-%m')
+        GROUP BY date_format(t.ENTER_TIME, '%Y-%m')
+    </select>
+
+</mapper>

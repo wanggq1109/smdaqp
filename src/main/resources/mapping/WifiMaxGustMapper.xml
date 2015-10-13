@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.WifiMaxGustMapper" >
+    <resultMap id="BaseResultMap" type="com.powerlong.model.WifiMaxGust" >
+        <id column="ID" property="id" jdbcType="BIGINT" />
+        <result column="MAX_ADDRESS" property="maxAddress" jdbcType="VARCHAR" />
+        <result column="APP_TYPE" property="appType" jdbcType="VARCHAR" />
+        <result column="LOGIN_TIME" property="loginTime" jdbcType="TIMESTAMP" />
+        <result column="IP" property="ip" jdbcType="VARCHAR" />
+        <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+        <result column="MALL_ID" property="mallId" jdbcType="BIGINT" />
+        <result column="FLOOR" property="floor" jdbcType="VARCHAR" />
+        <result column="RESIDENCE_TIME" property="residenceTime" jdbcType="BIGINT" />
+        <result column="SHOP_ID" property="shopId" jdbcType="VARCHAR" />
+        <result column="SHOP_NAME" property="shopName" jdbcType="VARCHAR" />
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+        <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        ID, MAX_ADDRESS, APP_TYPE, LOGIN_TIME, IP, CREATED_DATE, UPDATED_DATE, MALL_ID, FLOOR,
+        RESIDENCE_TIME, SHOP_ID, SHOP_NAME, MOBILE, MALL_NAME
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from wifi_max_gust
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from wifi_max_gust
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.powerlong.model.WifiMaxGust" >
+        insert into wifi_max_gust (ID, MAX_ADDRESS, APP_TYPE,
+        LOGIN_TIME, IP, CREATED_DATE,
+        UPDATED_DATE, MALL_ID, FLOOR,
+        RESIDENCE_TIME, SHOP_ID, SHOP_NAME,
+        MOBILE, MALL_NAME)
+        values (#{id,jdbcType=BIGINT}, #{maxAddress,jdbcType=VARCHAR}, #{appType,jdbcType=VARCHAR},
+        #{loginTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP},
+        #{updatedDate,jdbcType=TIMESTAMP}, #{mallId,jdbcType=BIGINT}, #{floor,jdbcType=VARCHAR},
+        #{residenceTime,jdbcType=BIGINT}, #{shopId,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR},
+        #{mobile,jdbcType=VARCHAR}, #{mallName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.powerlong.model.WifiMaxGust" >
+        insert into wifi_max_gust
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="maxAddress != null" >
+                MAX_ADDRESS,
+            </if>
+            <if test="appType != null" >
+                APP_TYPE,
+            </if>
+            <if test="loginTime != null" >
+                LOGIN_TIME,
+            </if>
+            <if test="ip != null" >
+                IP,
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE,
+            </if>
+            <if test="updatedDate != null" >
+                UPDATED_DATE,
+            </if>
+            <if test="mallId != null" >
+                MALL_ID,
+            </if>
+            <if test="floor != null" >
+                FLOOR,
+            </if>
+            <if test="residenceTime != null" >
+                RESIDENCE_TIME,
+            </if>
+            <if test="shopId != null" >
+                SHOP_ID,
+            </if>
+            <if test="shopName != null" >
+                SHOP_NAME,
+            </if>
+            <if test="mobile != null" >
+                MOBILE,
+            </if>
+            <if test="mallName != null" >
+                MALL_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="maxAddress != null" >
+                #{maxAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null" >
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null" >
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null" >
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null" >
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedDate != null" >
+                #{updatedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mallId != null" >
+                #{mallId,jdbcType=BIGINT},
+            </if>
+            <if test="floor != null" >
+                #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="residenceTime != null" >
+                #{residenceTime,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                #{shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null" >
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="mallName != null" >
+                #{mallName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.WifiMaxGust" >
+        update wifi_max_gust
+        <set >
+            <if test="maxAddress != null" >
+                MAX_ADDRESS = #{maxAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null" >
+                APP_TYPE = #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null" >
+                LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null" >
+                IP = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null" >
+                CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedDate != null" >
+                UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mallId != null" >
+                MALL_ID = #{mallId,jdbcType=BIGINT},
+            </if>
+            <if test="floor != null" >
+                FLOOR = #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="residenceTime != null" >
+                RESIDENCE_TIME = #{residenceTime,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                SHOP_ID = #{shopId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null" >
+                SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null" >
+                MOBILE = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="mallName != null" >
+                MALL_NAME = #{mallName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.powerlong.model.WifiMaxGust" >
+        update wifi_max_gust
+        set MAX_ADDRESS = #{maxAddress,jdbcType=VARCHAR},
+        APP_TYPE = #{appType,jdbcType=VARCHAR},
+        LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+        IP = #{ip,jdbcType=VARCHAR},
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+        UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+        MALL_ID = #{mallId,jdbcType=BIGINT},
+        FLOOR = #{floor,jdbcType=VARCHAR},
+        RESIDENCE_TIME = #{residenceTime,jdbcType=BIGINT},
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+        SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+        MALL_NAME = #{mallName,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 根据条件查询 -->
+    <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.powerlong.model.WifiMaxGust" >
+        select
+        <include refid="Base_Column_List" />
+        from wifi_max_gust
+        where 1=1
+        <if test="id != null" >
+            AND ID = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="maxAddress != null" >
+            AND MAX_ADDRESS = #{maxAddress,jdbcType=VARCHAR}
+        </if>
+        <if test="appType != null" >
+            AND APP_TYPE = #{appType,jdbcType=VARCHAR}
+        </if>
+        <if test="loginTime != null" >
+            AND LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="ip != null" >
+            AND IP = #{ip,jdbcType=VARCHAR}
+        </if>
+        <if test="createdDate != null" >
+            AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updatedDate != null" >
+            AND UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="mallId != null" >
+            AND MALL_ID = #{mallId,jdbcType=BIGINT}
+        </if>
+
+    </select>
+
+    <!-- 获取当前用户楼层停留时间 -->
+    <select id="selectCountTimeOnFloor" resultMap="BaseResultMap" parameterType="com.powerlong.model.WifiMaxGust" >
+        SELECT
+        sum(t.RESIDENCE_TIME) AS residenceTime,
+        t.FLOOR
+        FROM
+        wifi_max_gust t
+        WHERE
+
+        MOBILE = #{mobile,jdbcType=VARCHAR}
+
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+
+        GROUP BY
+
+        t.FLOOR
+    </select>
+
+    <!-- 获取当前用户店铺停留时间 -->
+    <select id="selectCountTimeOnShop" resultMap="BaseResultMap" parameterType="com.powerlong.model.WifiMaxGust" >
+        SELECT
+        sum(t.RESIDENCE_TIME) AS residenceTime,
+        t.SHOP_NAME,
+        t.SHOP_ID
+        FROM
+        wifi_max_gust t
+        WHERE
+
+        MOBILE = #{mobile,jdbcType=VARCHAR}
+
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+
+        GROUP BY
+
+        t.SHOP_ID
+    </select>
+
+    <select id="selectSplusWifiDataCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+        select
+        COUNT(t.ID)
+        FROM wifi_max_gust t
+        where 1=1
+        <if test="params.mallId != null" >
+            AND t.MALL_ID = #{params.mallId,jdbcType=BIGINT}
+        </if>
+        <if test="params.shopId != null" >
+            AND t.SHOP_ID = #{params.shopId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.shopName != null" >
+            AND t.SHOP_NAME = #{params.shopName,jdbcType=VARCHAR}
+        </if>
+        <if test="params.mobile != null" >
+            AND t.MOBILE like CONCAT('%',#{params.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.startTime != null" >
+            <![CDATA[
+            AND t.LOGIN_TIME >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND t.LOGIN_TIME <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+    </select>
+
+    <!-- 分页查询 selectSplusWifiData -->
+    <select id="selectSplusWifiData" resultMap="BaseResultMap" parameterType="com.powerlong.common.Paginator" >
+        select
+        <include refid="Base_Column_List" />
+        FROM wifi_max_gust t
+        where 1=1
+        <if test="params.mallId != null" >
+            AND t.MALL_ID = #{params.mallId,jdbcType=BIGINT}
+        </if>
+        <if test="params.shopId != null" >
+            AND t.SHOP_ID = #{params.shopId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.shopName != null" >
+            AND t.SHOP_NAME = #{params.shopName,jdbcType=VARCHAR}
+        </if>
+        <if test="params.mobile != null" >
+            AND t.MOBILE like CONCAT('%',#{params.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.startTime != null" >
+            <![CDATA[
+            AND t.LOGIN_TIME >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND t.LOGIN_TIME <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        ORDER BY t.LOGIN_TIME DESC
+        limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+    </select>
+
+    <!-- 获取广场当前连接人数 -->
+    <select id="selectMallAllDataByMallId" resultType="java.lang.Long" parameterType="com.powerlong.model.WifiMaxGust" >
+        SELECT
+            count(*)
+        FROM
+            wifi_max_gust t
+        WHERE
+            t.MALL_ID = #{mallId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+    </select>
+
+    <!-- 获取广场当月连接人数 -->
+    <select id="selectMallWifiMonthDataByMallId" resultMap="BaseResultMap" parameterType="com.powerlong.model.WifiMaxGust" >
+        SELECT
+            count(t.ID) AS ID,
+            DATE_FORMAT(t.CREATED_DATE, "%Y") AS MAX_ADDRESS,
+            DATE_FORMAT(t.CREATED_DATE, "%m") AS IP,
+            DATE_FORMAT(t.CREATED_DATE, "%d") AS FLOOR
+        FROM
+            wifi_max_gust t
+        WHERE
+            t.MALL_ID = #{mallId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+            date_format(t.CREATED_DATE, '%Y-%m-%d')
+    </select>
+
+    <!--滚动屏临时需求方法-->
+    <select id="selectInfoStreamList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from wifi_max_gust
+        ORDER BY LOGIN_TIME DESC  limit 2
+    </select>
+
+</mapper>

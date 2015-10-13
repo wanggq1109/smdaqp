@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.TrafficMallMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.model.TrafficMall" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="MALL_ID" property="mallId" jdbcType="BIGINT" />
+    <result column="GET_INFO_TIME" property="getInfoTime" jdbcType="TIMESTAMP" />
+    <result column="AMOUNT" property="amount" jdbcType="BIGINT" />
+    <result column="TARGET" property="target" jdbcType="VARCHAR" />
+    <result column="LEAVE_TIME" property="leaveTime" jdbcType="TIMESTAMP" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MALL_ID, GET_INFO_TIME, AMOUNT, TARGET, LEAVE_TIME, CREATED_DATE, UPDATED_DATE,
+    MALL_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from traffic_mall
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from traffic_mall
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.powerlong.model.TrafficMall" >
+    insert into traffic_mall (ID, MALL_ID, GET_INFO_TIME,
+    AMOUNT, TARGET, LEAVE_TIME,
+    CREATED_DATE, UPDATED_DATE, MALL_NAME
+    )
+    values (#{id,jdbcType=BIGINT}, #{mallId,jdbcType=BIGINT}, #{getInfoTime,jdbcType=TIMESTAMP},
+    #{amount,jdbcType=BIGINT}, #{target,jdbcType=VARCHAR}, #{leaveTime,jdbcType=TIMESTAMP},
+    #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}, #{mallName,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerlong.model.TrafficMall" >
+    insert into traffic_mall
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="mallId != null" >
+        MALL_ID,
+      </if>
+      <if test="getInfoTime != null" >
+        GET_INFO_TIME,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="target != null" >
+        TARGET,
+      </if>
+      <if test="leaveTime != null" >
+        LEAVE_TIME,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE,
+      </if>
+      <if test="mallName != null" >
+        MALL_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mallId != null" >
+        #{mallId,jdbcType=BIGINT},
+      </if>
+      <if test="getInfoTime != null" >
+        #{getInfoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null" >
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallName != null" >
+        #{mallName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.TrafficMall" >
+    update traffic_mall
+    <set >
+      <if test="mallId != null" >
+        MALL_ID = #{mallId,jdbcType=BIGINT},
+      </if>
+      <if test="getInfoTime != null" >
+        GET_INFO_TIME = #{getInfoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="target != null" >
+        TARGET = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null" >
+        LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallName != null" >
+        MALL_NAME = #{mallName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerlong.model.TrafficMall" >
+    update traffic_mall
+    set MALL_ID = #{mallId,jdbcType=BIGINT},
+      GET_INFO_TIME = #{getInfoTime,jdbcType=TIMESTAMP},
+      AMOUNT = #{amount,jdbcType=BIGINT},
+      TARGET = #{target,jdbcType=VARCHAR},
+      LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      MALL_NAME = #{mallName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+    <!-- 根据条查询商场客流信息 -->
+    <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.powerlong.model.TrafficMall" >
+        select
+        <include refid="Base_Column_List" />
+        from traffic_mall
+        where 1=1
+        <if test="id != null" >
+            AND ID = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="mallId != null" >
+            AND MALL_ID = #{mallId,jdbcType=BIGINT}
+        </if>
+        <if test="getInfoTime != null" >
+            AND GET_INFO_TIME = #{getInfoTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="amount != null" >
+            AND AMOUNT = #{amount,jdbcType=BIGINT}
+        </if>
+        <if test="target != null" >
+            AND TARGET = #{target,jdbcType=VARCHAR}
+        </if>
+        <if test="leaveTime != null" >
+            AND LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createdDate != null" >
+            AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updatedDate != null" >
+            AND UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+  <select id="selectSplusPassengerDataCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+    select
+    COUNT(ID)
+    FROM traffic_mall t
+    where 1=1
+    <if test="params.mallId != null" >
+      AND MALL_ID = #{params.mallId,jdbcType=BIGINT}
+    </if>
+    <if test="params.target != null" >
+      AND TARGET like CONCAT('%',#{params.target,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="params.startTime != null" >
+      <![CDATA[
+            AND CREATED_DATE >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    <if test="params.endTime != null" >
+      <![CDATA[
+            AND CREATED_DATE <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+  </select>
+
+  <!-- 分页查询 selectSplusPassengerData -->
+  <select id="selectSplusPassengerData" resultMap="BaseResultMap" parameterType="com.powerlong.common.Paginator" >
+    select
+    <include refid="Base_Column_List" />
+    FROM traffic_mall
+    where 1=1
+    <if test="params.mallId != null" >
+      AND MALL_ID = #{params.mallId,jdbcType=BIGINT}
+    </if>
+    <if test="params.target != null" >
+      AND TARGET like CONCAT('%',#{params.target,jdbcType=VARCHAR},'%')
+    </if>
+
+    <if test="params.startTime != null" >
+      <![CDATA[
+            AND CREATED_DATE >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    <if test="params.endTime != null" >
+      <![CDATA[
+            AND CREATED_DATE <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    ORDER BY CREATED_DATE DESC
+    limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+  </select>
+
+
+    <!-- 获取当天客流量 -->
+    <select id="selectMallTrafficDataByMallId" resultType="java.lang.Long" parameterType="com.powerlong.model.TrafficMall" >
+        SELECT
+        sum(t.AMOUNT)
+        FROM
+        traffic_mall t
+        WHERE
+        t.MALL_ID = #{mallId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+        t.MALL_ID
+    </select>
+
+    <!-- 获取当月客流量 -->
+    <select id="selectMallTrafficMonthDataByMallId" resultMap="BaseResultMap" parameterType="com.powerlong.model.TrafficMall" >
+        SELECT
+            sum(t.AMOUNT) AS ID,
+            DATE_FORMAT(t.CREATED_DATE, "%Y") AS TARGET,
+            DATE_FORMAT(t.CREATED_DATE, "%m") AS MALL_NAME,
+            DATE_FORMAT(t.CREATED_DATE, "%d") AS MALL_ID
+        FROM
+            traffic_mall t
+        WHERE
+            t.MALL_ID = #{mallId,jdbcType=BIGINT}
+        AND date_format(t.CREATED_DATE, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+            date_format(t.CREATED_DATE, '%Y-%m-%d')
+    </select>
+
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.ParkingUserMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.model.ParkingUser" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CRM_USER" property="crmUser" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="PLATE_NO" property="plateNo" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="IS_DEL" property="isDel" jdbcType="CHAR" />
+    <result column="MALL_ID" property="mallId" jdbcType="VARCHAR" />
+    <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CRM_USER, MOBILE, PLATE_NO, CREATED_DATE, UPDATED_DATE, IS_DEL, MALL_ID, MALL_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_user
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPlateNoAndMobile" resultMap="BaseResultMap" parameterType="com.powerlong.model.ParkingUser" >
+    select
+    <include refid="Base_Column_List" />
+    from parking_user
+    where MOBILE = #{mobile,jdbcType=VARCHAR} OR PLATE_NO = #{plateNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from parking_user
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.powerlong.model.ParkingUser" >
+   insert into parking_user (ID, CRM_USER, MOBILE,
+      PLATE_NO, CREATED_DATE, UPDATED_DATE,
+      IS_DEL, MALL_ID, MALL_NAME
+      )
+    values (#{id,jdbcType=BIGINT}, #{crmUser,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+      #{plateNo,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP},
+      #{isDel,jdbcType=CHAR}, #{mallId,jdbcType=VARCHAR}, #{mallName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerlong.model.ParkingUser" >
+    insert into parking_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="crmUser != null" >
+        CRM_USER,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="plateNo != null" >
+        PLATE_NO,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="mallId != null" >
+        MALL_ID,
+      </if>
+      <if test="mallName != null" >
+        MALL_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="crmUser != null" >
+        #{crmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNo != null" >
+        #{plateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=CHAR},
+      </if>
+      <if test="mallId != null" >
+        #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null" >
+        #{mallName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.ParkingUser" >
+    update parking_user
+    <set >
+      <if test="crmUser != null" >
+        CRM_USER = #{crmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNo != null" >
+        PLATE_NO = #{plateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,jdbcType=CHAR},
+      </if>
+      <if test="mallId != null" >
+        MALL_ID = #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="mallName != null" >
+        MALL_NAME = #{mallName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerlong.model.ParkingUser" >
+    update parking_user
+    set CRM_USER = #{crmUser,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      PLATE_NO = #{plateNo,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      IS_DEL = #{isDel,jdbcType=CHAR},
+      MALL_ID = #{mallId,jdbcType=VARCHAR},
+      MALL_NAME = #{mallName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!-- 获取当天商场停车数 -->
+    <select id="selectParkingMallAllDataByMallId" resultType="java.lang.Long" parameterType="com.powerlong.model.ParkingUser" >
+        SELECT
+        count(*)
+        FROM
+        parking_detail pd,
+        parking_user pu
+        WHERE
+        pd.PLATE_NO = pu.PLATE_NO
+        AND date_format(pd.ENTRY_TIME, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        AND pu.MALL_ID =  #{mallId,jdbcType=VARCHAR}
+    </select>
+
+
+    <!-- 获取当月商场停车数量 -->
+    <select id="selectParkingMallCountDataByMallId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT
+        count(pd.ID) AS ID,
+        DATE_FORMAT(pd.ENTRY_TIME, "%Y") AS CRM_USER,
+        DATE_FORMAT(pd.ENTRY_TIME, "%m") AS MOBILE,
+        DATE_FORMAT(pd.ENTRY_TIME, "%d") AS PLATE_NO
+        FROM
+        parking_detail pd,
+        parking_user pu
+        WHERE
+        pd.PLATE_NO = pu.PLATE_NO
+        AND pd.LEAVE_TIME is NULL
+        AND date_format(pd.ENTRY_TIME, '%Y-%m') = date_format(#{createdDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        AND pu.MALL_ID =  #{mallId,jdbcType=VARCHAR}
+GROUP BY
+	date_format(pd.ENTRY_TIME, '%Y-%m-%d')
+    </select>
+
+    <!-- 根据手机号获取车牌 -->
+    <select id="selectPlateNoByUserMobile" resultType="java.lang.String" parameterType="com.powerlong.model.ParkingUser" >
+        select
+        PLATE_NO
+        from parking_user
+        where MOBILE = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

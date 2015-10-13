@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.ReceiptMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.model.Receipt" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="ReceiptNum" property="receiptnum" jdbcType="VARCHAR" />
+    <result column="CPTId" property="cptid" jdbcType="VARCHAR" />
+    <result column="TSDate" property="tsdate" jdbcType="TIMESTAMP" />
+    <result column="TotalAmount" property="totalamount" jdbcType="DOUBLE" />
+    <result column="QRCode" property="qrcode" jdbcType="VARCHAR" />
+    <result column="TSId" property="tsid" jdbcType="VARCHAR" />
+    <result column="MerchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="EnterAmount" property="enteramount" jdbcType="DOUBLE" />
+    <result column="ProductIf" property="productif" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="ReceiptName" property="receiptname" jdbcType="VARCHAR" />
+    <result column="ImageUrl" property="imageurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, ReceiptNum, CPTId, TSDate, TotalAmount, QRCode, TSId, MerchantId, EnterAmount, 
+    ProductIf, CreateTime, ReceiptName, ImageUrl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_receipt
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+   <select id="selectByQRCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_receipt
+    where QRCode = #{qrcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_receipt
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.powerlong.model.Receipt" >
+    insert into t_receipt (Id, ReceiptNum, CPTId, 
+      TSDate, TotalAmount, QRCode, 
+      TSId, MerchantId, EnterAmount, 
+      ProductIf, CreateTime, ReceiptName,
+      ImageUrl)
+    values (#{id,jdbcType=BIGINT}, #{receiptnum,jdbcType=VARCHAR}, #{cptid,jdbcType=VARCHAR},
+      #{tsdate,jdbcType=TIMESTAMP}, #{totalamount,jdbcType=DOUBLE}, #{qrcode,jdbcType=VARCHAR},
+      #{tsid,jdbcType=VARCHAR}, #{merchantid,jdbcType=VARCHAR}, #{enteramount,jdbcType=DOUBLE},
+      #{productif,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{receiptname,jdbcType=VARCHAR},
+      #{imageurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerlong.model.Receipt" >
+    insert into t_receipt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="receiptnum != null" >
+        ReceiptNum,
+      </if>
+      <if test="cptid != null" >
+        CPTId,
+      </if>
+      <if test="tsdate != null" >
+        TSDate,
+      </if>
+      <if test="totalamount != null" >
+        TotalAmount,
+      </if>
+      <if test="qrcode != null" >
+        QRCode,
+      </if>
+      <if test="tsid != null" >
+        TSId,
+      </if>
+      <if test="merchantid != null" >
+        MerchantId,
+      </if>
+      <if test="enteramount != null" >
+        EnterAmount,
+      </if>
+      <if test="productif != null" >
+        ProductIf,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="receiptname != null" >
+        ReceiptName,
+      </if>
+      <if test="imageurl != null" >
+        ImageUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="receiptnum != null" >
+        #{receiptnum,jdbcType=VARCHAR},
+      </if>
+      <if test="cptid != null" >
+        #{cptid,jdbcType=VARCHAR},
+      </if>
+      <if test="tsdate != null" >
+        #{tsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DOUBLE},
+      </if>
+      <if test="qrcode != null" >
+        #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tsid != null" >
+        #{tsid,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="enteramount != null" >
+        #{enteramount,jdbcType=DOUBLE},
+      </if>
+      <if test="productif != null" >
+        #{productif,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiptname != null" >
+        #{receiptname,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.Receipt" >
+    update t_receipt
+    <set >
+      <if test="receiptnum != null" >
+        ReceiptNum = #{receiptnum,jdbcType=VARCHAR},
+      </if>
+      <if test="cptid != null" >
+        CPTId = #{cptid,jdbcType=VARCHAR},
+      </if>
+      <if test="tsdate != null" >
+        TSDate = #{tsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalamount != null" >
+        TotalAmount = #{totalamount,jdbcType=DOUBLE},
+      </if>
+      <if test="qrcode != null" >
+        QRCode = #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tsid != null" >
+        TSId = #{tsid,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantid != null" >
+        MerchantId = #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="enteramount != null" >
+        EnterAmount = #{enteramount,jdbcType=DOUBLE},
+      </if>
+      <if test="productif != null" >
+        ProductIf = #{productif,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiptname != null" >
+        ReceiptName = #{receiptname,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        ImageUrl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerlong.model.Receipt" >
+    update t_receipt
+    set ReceiptNum = #{receiptnum,jdbcType=VARCHAR},
+      CPTId = #{cptid,jdbcType=VARCHAR},
+      TSDate = #{tsdate,jdbcType=TIMESTAMP},
+      TotalAmount = #{totalamount,jdbcType=DOUBLE},
+      QRCode = #{qrcode,jdbcType=VARCHAR},
+      TSId = #{tsid,jdbcType=VARCHAR},
+      MerchantId = #{merchantid,jdbcType=VARCHAR},
+      EnterAmount = #{enteramount,jdbcType=DOUBLE},
+      ProductIf = #{productif,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      ReceiptName = #{receiptname,jdbcType=VARCHAR},
+      ImageUrl = #{imageurl,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

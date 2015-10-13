@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.DataBoxPosmonitorMapper" >
+    <resultMap id="BaseResultMap" type="com.powerlong.model.DataBoxPosmonitor" >
+        <id column="ID" property="id" jdbcType="BIGINT" />
+        <result column="CPTID" property="cptid" jdbcType="VARCHAR" />
+        <result column="MERCHANTID" property="merchantid" jdbcType="VARCHAR" />
+        <result column="MERCHANTNAME" property="merchantname" jdbcType="VARCHAR" />
+        <result column="BEGINTIME" property="begintime" jdbcType="TIMESTAMP" />
+        <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+        <result column="RECEIPTSUM" property="receiptsum" jdbcType="INTEGER" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="TOTAL_SUM" property="totalSum" jdbcType="DOUBLE" />
+        <result column="MALL_ID" property="mallId" jdbcType="BIGINT" />
+        <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        ID, CPTID, MERCHANTID, MERCHANTNAME, BEGINTIME, ENDTIME, RECEIPTSUM, CREATE_TIME,
+        TOTAL_SUM, MALL_ID, MALL_NAME
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from t_posmonitor
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_posmonitor
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        insert into t_posmonitor (ID, CPTID, MERCHANTID,
+        MERCHANTNAME, BEGINTIME, ENDTIME,
+        RECEIPTSUM, CREATE_TIME, TOTAL_SUM,
+        MALL_ID, MALL_NAME)
+        values (#{id,jdbcType=BIGINT}, #{cptid,jdbcType=VARCHAR}, #{merchantid,jdbcType=VARCHAR},
+        #{merchantname,jdbcType=VARCHAR}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP},
+        #{receiptsum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{totalSum,jdbcType=DOUBLE},
+        #{mallId,jdbcType=BIGINT}, #{mallName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        insert into t_posmonitor
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="cptid != null" >
+                CPTID,
+            </if>
+            <if test="merchantid != null" >
+                MERCHANTID,
+            </if>
+            <if test="merchantname != null" >
+                MERCHANTNAME,
+            </if>
+            <if test="begintime != null" >
+                BEGINTIME,
+            </if>
+            <if test="endtime != null" >
+                ENDTIME,
+            </if>
+            <if test="receiptsum != null" >
+                RECEIPTSUM,
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME,
+            </if>
+            <if test="totalSum != null" >
+                TOTAL_SUM,
+            </if>
+            <if test="mallId != null" >
+                MALL_ID,
+            </if>
+            <if test="mallName != null" >
+                MALL_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="cptid != null" >
+                #{cptid,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantid != null" >
+                #{merchantid,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantname != null" >
+                #{merchantname,jdbcType=VARCHAR},
+            </if>
+            <if test="begintime != null" >
+                #{begintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endtime != null" >
+                #{endtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiptsum != null" >
+                #{receiptsum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalSum != null" >
+                #{totalSum,jdbcType=DOUBLE},
+            </if>
+            <if test="mallId != null" >
+                #{mallId,jdbcType=BIGINT},
+            </if>
+            <if test="mallName != null" >
+                #{mallName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        update t_posmonitor
+        <set >
+            <if test="cptid != null" >
+                CPTID = #{cptid,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantid != null" >
+                MERCHANTID = #{merchantid,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantname != null" >
+                MERCHANTNAME = #{merchantname,jdbcType=VARCHAR},
+            </if>
+            <if test="begintime != null" >
+                BEGINTIME = #{begintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endtime != null" >
+                ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiptsum != null" >
+                RECEIPTSUM = #{receiptsum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalSum != null" >
+                TOTAL_SUM = #{totalSum,jdbcType=DOUBLE},
+            </if>
+            <if test="mallId != null" >
+                MALL_ID = #{mallId,jdbcType=BIGINT},
+            </if>
+            <if test="mallName != null" >
+                MALL_NAME = #{mallName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        update t_posmonitor
+        set CPTID = #{cptid,jdbcType=VARCHAR},
+        MERCHANTID = #{merchantid,jdbcType=VARCHAR},
+        MERCHANTNAME = #{merchantname,jdbcType=VARCHAR},
+        BEGINTIME = #{begintime,jdbcType=TIMESTAMP},
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+        RECEIPTSUM = #{receiptsum,jdbcType=INTEGER},
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        TOTAL_SUM = #{totalSum,jdbcType=DOUBLE},
+        MALL_ID = #{mallId,jdbcType=BIGINT},
+        MALL_NAME = #{mallName,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 分页查询获取总数 selectDataBoxPosmonitorDataCount -->
+    <select id="selectDataBoxPosmonitorDataCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+        select
+        COUNT(ID)
+        from t_posmonitor
+        where 1=1
+        <if test="params.merchantid != null" >
+            AND MERCHANTID = #{params.merchantid,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <!-- 分页查询 selectDataBoxPosmonitorData -->
+    <select id="selectDataBoxPosmonitorData" resultMap="BaseResultMap" parameterType="com.powerlong.common.Paginator" >
+        select
+        <include refid="Base_Column_List" />
+        from t_posmonitor
+        where 1=1
+
+        <if test="params.merchantid != null" >
+            AND MERCHANTID = #{params.merchantid,jdbcType=VARCHAR}
+        </if>
+
+        ORDER BY t_posmonitor.CREATE_TIME DESC
+
+        limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+
+    </select>
+
+    <!-- 获取商户信息 -->
+    <select id="selectMerchantByMerchantid" resultType="com.powerlong.model.DataBoxPosmonitor" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        SELECT DISTINCT
+        t.MERCHANTID,
+        t.MERCHANTNAME
+        FROM
+        t_posmonitor t
+        WHERE
+        t.MERCHANTID = #{merchantid,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 获取商户当月消费总金额 -->
+    <select id="selectMerchantTotalSumPay" resultType="java.lang.Double" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        SELECT
+        SUM(t.TotalAmount) as TOTAL_SUM
+        FROM
+        t_receipt t,
+        databox_user du
+        WHERE
+        date_format(t.CreateTime, '%Y-%m') = date_format(#{createTime,jdbcType=TIMESTAMP}, '%Y-%m')
+        AND t.QRCode = du.QRCODE
+        <if test="mallId != null" >
+            AND du.mall_id = #{mallId,jdbcType=BIGINT}
+        </if>
+        <if test="merchantid != null" >
+            AND t.MERCHANTID = #{merchantid,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <!-- 去当月用户性别比例 -->
+    <select id="selectMerchantPaySexCount" resultMap="BaseResultMap" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        SELECT
+        count(DISTINCT(du.mobile)) AS ID,
+        du.sex as MERCHANTNAME
+        FROM
+        databox_user du,
+        t_receipt tr
+        WHERE
+        tr.QRCode = du.QRCODE
+        <if test="mallId != null" >
+            AND du.mall_id = #{mallId,jdbcType=BIGINT}
+        </if>
+        <if test="merchantid != null" >
+            AND tr.MERCHANTID = #{merchantid,jdbcType=VARCHAR}
+        </if>
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(#{createTime,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+        du.SEX
+    </select>
+
+    <!-- 去当广场线下消费信息 -->
+    <select id="selectMallPaySum" resultMap="BaseResultMap" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        SELECT
+        sum(tr.TotalAmount)/1000 as TOTAL_SUM,
+        DATE_FORMAT(tr.CreateTime, "%Y") AS MERCHANTID,
+        DATE_FORMAT(tr.CreateTime, "%m") AS MERCHANTNAME,
+        DATE_FORMAT(tr.CreateTime, "%d") AS MALL_NAME
+        FROM
+        databox_user du,
+        t_receipt tr
+        WHERE
+        du.MALL_ID = #{mallId,jdbcType=BIGINT}
+        AND	tr.QRCode = du.QRCODE
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(#{createTime,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+        DATE_FORMAT(tr.CreateTime, '%Y-%m-%d')
+    </select>
+
+    <!-- 获取每天性别人数 -->
+    <select id="selectMerchantPaySexCountBySex" resultMap="BaseResultMap" parameterType="com.powerlong.model.DataBoxPosmonitor" >
+        SELECT
+        count(DISTINCT(du.mobile)) AS ID,
+        DATE_FORMAT(tr.CreateTime, "%Y") AS MERCHANTID,
+        DATE_FORMAT(tr.CreateTime, "%m") AS MERCHANTNAME,
+        DATE_FORMAT(tr.CreateTime, "%d") AS MALL_NAME
+        FROM
+        databox_user du,
+        t_receipt tr
+        WHERE
+        tr.QRCode = du.QRCODE
+
+        AND du.mall_id = #{mallId,jdbcType=BIGINT}
+
+        AND date_format(tr.CreateTime, '%Y-%m') = date_format(#{createTime,jdbcType=TIMESTAMP}, '%Y-%m')
+        AND du.SEX = #{mallName,jdbcType=VARCHAR}
+        GROUP BY
+        date_format(tr.CreateTime, '%Y-%m-%d')
+    </select>
+
+</mapper>

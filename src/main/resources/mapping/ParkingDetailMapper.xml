@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.ParkingDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.model.ParkingDetail" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="KT_ID" property="ktId" jdbcType="VARCHAR" />
+    <result column="PLATE_NO" property="plateNo" jdbcType="VARCHAR" />
+    <result column="ENTRY_TIME" property="entryTime" jdbcType="TIMESTAMP" />
+    <result column="ENTRY_PLACE" property="entryPlace" jdbcType="VARCHAR" />
+    <result column="LEAVE_TIME" property="leaveTime" jdbcType="TIMESTAMP" />
+    <result column="LEAVE_PLACE" property="leavePlace" jdbcType="VARCHAR" />
+    <result column="IMG_NAME" property="imgName" jdbcType="VARCHAR" />
+    <result column="PAYABLE" property="payable" jdbcType="DECIMAL" />
+    <result column="VOUCHER" property="voucher" jdbcType="VARCHAR" />
+    <result column="CASH_USER" property="cashUser" jdbcType="VARCHAR" />
+    <result column="CASH_TIME" property="cashTime" jdbcType="TIMESTAMP" />
+    <result column="IS_DEL" property="isDel" jdbcType="CHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="PAY_TYPE" property="payType" jdbcType="CHAR" />
+  </resultMap>
+
+  <resultMap id="BaseResultMallMap" type="com.powerlong.vo.DataBoxIndexParkingVo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="KT_ID" property="ktId" jdbcType="VARCHAR" />
+    <result column="PLATE_NO" property="plateNo" jdbcType="VARCHAR" />
+    <result column="ENTRY_TIME" property="entryTime" jdbcType="TIMESTAMP" />
+    <result column="ENTRY_PLACE" property="entryPlace" jdbcType="VARCHAR" />
+    <result column="LEAVE_TIME" property="leaveTime" jdbcType="TIMESTAMP" />
+    <result column="LEAVE_PLACE" property="leavePlace" jdbcType="VARCHAR" />
+    <result column="IMG_NAME" property="imgName" jdbcType="VARCHAR" />
+    <result column="PAYABLE" property="payable" jdbcType="DECIMAL" />
+    <result column="VOUCHER" property="voucher" jdbcType="VARCHAR" />
+    <result column="CASH_USER" property="cashUser" jdbcType="VARCHAR" />
+    <result column="CASH_TIME" property="cashTime" jdbcType="TIMESTAMP" />
+    <result column="IS_DEL" property="isDel" jdbcType="CHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="PAY_TYPE" property="payType" jdbcType="CHAR" />
+    <result column="MALL_ID" property="mallId" jdbcType="VARCHAR" />
+    <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="CRM_USER" property="crmUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, KT_ID, PLATE_NO, ENTRY_TIME, ENTRY_PLACE, LEAVE_TIME, LEAVE_PLACE, IMG_NAME, 
+    PAYABLE, VOUCHER, CASH_USER, CASH_TIME, IS_DEL, CREATED_DATE, UPDATED_DATE, PAY_TYPE
+  </sql>
+  <sql id="Base_Column_mall_List" >
+    d.ID, d.KT_ID, d.PLATE_NO, d.ENTRY_TIME, d.ENTRY_PLACE, d.LEAVE_TIME, d.LEAVE_PLACE, d.IMG_NAME,
+    d.PAYABLE, d.VOUCHER, d.CASH_USER, d.CASH_TIME, d.IS_DEL, d.CREATED_DATE, d.UPDATED_DATE, d.PAY_TYPE,u.MALL_ID, u.MALL_NAME, u.MOBILE,u.CRM_USER
+  </sql>
+  <select id="selectByKtId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_detail
+    where KT_ID = #{ktId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPlateNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from parking_detail
+    where PLATE_NO = #{plateNo,jdbcType=VARCHAR},
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from parking_detail
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCashTimeAtToday" resultMap="BaseResultMap" parameterType="com.powerlong.model.ParkingDetail" >
+    select
+    <include refid="Base_Column_List" />
+    from parking_detail
+    where CASH_TIME >= #{cashTime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from parking_detail
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.powerlong.model.ParkingDetail" >
+    insert into parking_detail (ID, KT_ID, PLATE_NO, 
+      ENTRY_TIME, ENTRY_PLACE, LEAVE_TIME, 
+      LEAVE_PLACE, IMG_NAME, PAYABLE, 
+      VOUCHER, CASH_USER, CASH_TIME, 
+      IS_DEL, CREATED_DATE, UPDATED_DATE, 
+      PAY_TYPE)
+    values (#{id,jdbcType=BIGINT}, #{ktId,jdbcType=VARCHAR}, #{plateNo,jdbcType=VARCHAR}, 
+      #{entryTime,jdbcType=TIMESTAMP}, #{entryPlace,jdbcType=VARCHAR}, #{leaveTime,jdbcType=TIMESTAMP}, 
+      #{leavePlace,jdbcType=VARCHAR}, #{imgName,jdbcType=VARCHAR}, #{payable,jdbcType=DECIMAL}, 
+      #{voucher,jdbcType=VARCHAR}, #{cashUser,jdbcType=VARCHAR}, #{cashTime,jdbcType=TIMESTAMP}, 
+      #{isDel,jdbcType=CHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}, 
+      #{payType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerlong.model.ParkingDetail" >
+    insert into parking_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ktId != null" >
+        KT_ID,
+      </if>
+      <if test="plateNo != null" >
+        PLATE_NO,
+      </if>
+      <if test="entryTime != null" >
+        ENTRY_TIME,
+      </if>
+      <if test="entryPlace != null" >
+        ENTRY_PLACE,
+      </if>
+      <if test="leaveTime != null" >
+        LEAVE_TIME,
+      </if>
+      <if test="leavePlace != null" >
+        LEAVE_PLACE,
+      </if>
+      <if test="imgName != null" >
+        IMG_NAME,
+      </if>
+      <if test="payable != null" >
+        PAYABLE,
+      </if>
+      <if test="voucher != null" >
+        VOUCHER,
+      </if>
+      <if test="cashUser != null" >
+        CASH_USER,
+      </if>
+      <if test="cashTime != null" >
+        CASH_TIME,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE,
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ktId != null" >
+        #{ktId,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNo != null" >
+        #{plateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entryPlace != null" >
+        #{entryPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null" >
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leavePlace != null" >
+        #{leavePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="payable != null" >
+        #{payable,jdbcType=DECIMAL},
+      </if>
+      <if test="voucher != null" >
+        #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="cashUser != null" >
+        #{cashUser,jdbcType=VARCHAR},
+      </if>
+      <if test="cashTime != null" >
+        #{cashTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=CHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.ParkingDetail" >
+    update parking_detail
+    <set >
+      <if test="ktId != null" >
+        KT_ID = #{ktId,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNo != null" >
+        PLATE_NO = #{plateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        ENTRY_TIME = #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entryPlace != null" >
+        ENTRY_PLACE = #{entryPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null" >
+        LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leavePlace != null" >
+        LEAVE_PLACE = #{leavePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        IMG_NAME = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="payable != null" >
+        PAYABLE = #{payable,jdbcType=DECIMAL},
+      </if>
+      <if test="voucher != null" >
+        VOUCHER = #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="cashUser != null" >
+        CASH_USER = #{cashUser,jdbcType=VARCHAR},
+      </if>
+      <if test="cashTime != null" >
+        CASH_TIME = #{cashTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,jdbcType=CHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE = #{payType,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerlong.model.ParkingDetail" >
+    update parking_detail
+    set KT_ID = #{ktId,jdbcType=VARCHAR},
+      PLATE_NO = #{plateNo,jdbcType=VARCHAR},
+      ENTRY_TIME = #{entryTime,jdbcType=TIMESTAMP},
+      ENTRY_PLACE = #{entryPlace,jdbcType=VARCHAR},
+      LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      LEAVE_PLACE = #{leavePlace,jdbcType=VARCHAR},
+      IMG_NAME = #{imgName,jdbcType=VARCHAR},
+      PAYABLE = #{payable,jdbcType=DECIMAL},
+      VOUCHER = #{voucher,jdbcType=VARCHAR},
+      CASH_USER = #{cashUser,jdbcType=VARCHAR},
+      CASH_TIME = #{cashTime,jdbcType=TIMESTAMP},
+      IS_DEL = #{isDel,jdbcType=CHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATED_DATE = #{updatedDate,jdbcType=TIMESTAMP},
+      PAY_TYPE = #{payType,jdbcType=CHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 获取用户总共停车时间 -->
+    <select id="selectParkingUserTimeCount" resultType="java.lang.Long" parameterType="java.lang.String" >
+        SELECT
+        sum(round((UNIX_TIMESTAMP(pd.LEAVE_TIME)-UNIX_TIMESTAMP(pd.ENTRY_TIME))/60))
+        FROM
+        parking_detail pd,
+        parking_user pu
+        WHERE
+        pu.PLATE_NO = pd.PLATE_NO
+        AND pu.MOBILE = #{mobile,jdbcType=VARCHAR}
+        AND date_format(pd.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+    </select>
+
+    <!-- 获取用户支付类型支付金额数 -->
+    <select id="selectParkingUserPayTypeCount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT
+            sum(pd.PAYABLE) as PAYABLE,
+            pd.PAY_TYPE as PAY_TYPE
+        FROM
+            parking_detail pd,
+            parking_user pu
+        WHERE
+            pu.PLATE_NO = pd.PLATE_NO
+        AND date_format(pd.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        and pu.MOBILE =  #{mobile,jdbcType=VARCHAR}
+        GROUP BY pd.PAY_TYPE
+    </select>
+
+    <!-- 获取用户支付总金额数 -->
+    <select id="selectParkingUserPayCount" resultType="java.lang.Double" parameterType="java.lang.String" >
+        SELECT
+            sum(pd.PAYABLE)
+        FROM
+            parking_detail pd,
+            parking_user pu
+        WHERE
+            pu.PLATE_NO = pd.PLATE_NO
+        AND date_format(pd.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        AND pu.MOBILE =  #{mobile,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 获取用户停车场入口 -->
+    <select id="selectParkingEnterCount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT
+          count(pd.ENTRY_PLACE) as ID,
+          pd.ENTRY_PLACE
+        FROM
+            parking_detail pd,
+            parking_user pu
+        WHERE
+            pu.PLATE_NO = pd.PLATE_NO
+        AND date_format(pd.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        AND pu.MOBILE = #{mobile,jdbcType=VARCHAR}
+        GROUP BY pd.ENTRY_PLACE
+    </select>
+
+    <!-- 获取用户停车场出口 -->
+    <select id="selectParkingLeaveCount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT
+        count(pd.LEAVE_PLACE) as ID,
+        pd.LEAVE_PLACE
+        FROM
+        parking_detail pd,
+        parking_user pu
+        WHERE
+        pu.PLATE_NO = pd.PLATE_NO
+        AND date_format(pd.CREATED_DATE, '%Y-%m') = date_format(now(), '%Y-%m')
+        AND pu.MOBILE = #{mobile,jdbcType=VARCHAR}
+        GROUP BY pd.LEAVE_PLACE
+    </select>
+
+  <select id="selectSplusParingDataCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+    select
+    COUNT(d.ID)
+    FROM parking_detail d LEFT JOIN parking_user u  ON d.PLATE_NO = u.PLATE_NO WHERE 1=1
+    <if test="params.plateNo != null" >
+      AND d.PLATE_NO like CONCAT('%',#{params.plateNo,jdbcType=VARCHAR},'%') 
+    </if>
+    <if test="params.startTime != null" >
+      <![CDATA[
+            AND d.CREATED_DATE >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    <if test="params.endTime != null" >
+      <![CDATA[
+            AND d.CREATED_DATE <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    	<if test="params.isLeave == 0">
+	             and d.LEAVE_TIME IS NULL 
+        </if>
+        <if test="params.isLeave == 1">
+	             and d.LEAVE_TIME is not null
+        </if>
+  </select>
+
+  <!-- 分页查询 selectSplusParingData -->
+  <select id="selectSplusParingData" resultMap="BaseResultMallMap" parameterType="com.powerlong.common.Paginator" >
+    select
+    <include refid="Base_Column_mall_List" />
+    FROM parking_detail d LEFT JOIN parking_user u  ON d.PLATE_NO = u.PLATE_NO WHERE 1=1
+   
+    <if test="params.plateNo != null" >
+      AND d.PLATE_NO like CONCAT('%',#{params.plateNo,jdbcType=VARCHAR},'%') 
+    </if>
+    <if test="params.startTime != null" >
+      <![CDATA[
+            AND d.CREATED_DATE >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    <if test="params.endTime != null" >
+      <![CDATA[
+            AND d.CREATED_DATE <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+    </if>
+    	<if test="params.isLeave == 0">
+	             and d.LEAVE_TIME IS NULL 
+        </if>
+        <if test="params.isLeave == 1">
+	             and d.LEAVE_TIME is not null
+        </if>
+    ORDER BY d.CREATED_DATE DESC
+    limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+  </select>
+  <!--滚动屏临时需求方法-->
+  <select id="selectInfoStreamList" resultMap="BaseResultMallMap">
+    select
+    <include refid="Base_Column_mall_List" />
+    from parking_detail d LEFT JOIN parking_user u  ON d.PLATE_NO = u.PLATE_NO
+     ORDER BY d.CREATED_DATE DESC  limit 2
+  </select>
+</mapper>

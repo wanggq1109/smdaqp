@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.IbeanconLogMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.model.IbeanconLog" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="DEVICENO" property="deviceno" jdbcType="VARCHAR" />
+    <result column="IBEACONNO" property="ibeaconno" jdbcType="VARCHAR" />
+    <result column="CREADED_DATE" property="creadedDate" jdbcType="TIMESTAMP" />
+    <result column="RESOURCE" property="resource" jdbcType="VARCHAR" />
+    <result column="IBEACONID" property="ibeaconid" jdbcType="BIGINT" />
+    <result column="MALLId" property="mallId" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <resultMap id="IbeaDataResultMap" type="com.powerlong.vo.IbeanconDataVo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="DEVICENO" property="deviceno" jdbcType="VARCHAR" />
+    <result column="IBEACONNO" property="ibeaconno" jdbcType="VARCHAR" />
+    <result column="CREADED_DATE" property="creadedDate" jdbcType="TIMESTAMP" />
+    <result column="RESOURCE" property="resource" jdbcType="VARCHAR" />
+    <result column="IBEACONID" property="ibeaconid" jdbcType="BIGINT" />
+    <result column="MALLId" property="mallId" jdbcType="BIGINT" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="username" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MOBILE, DEVICENO, IBEACONNO, CREADED_DATE, RESOURCE, IBEACONID, MALLId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from IBEACONLOG
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from IBEACONLOG
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.powerlong.model.IbeanconLog" >
+    insert into IBEACONLOG (ID, MOBILE, DEVICENO, 
+      IBEACONNO, CREADED_DATE, RESOURCE, 
+      IBEACONID,MALLId)
+    values (#{id,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{deviceno,jdbcType=VARCHAR}, 
+      #{ibeaconno,jdbcType=VARCHAR}, #{creadedDate,jdbcType=TIMESTAMP}, #{resource,jdbcType=VARCHAR}, 
+      #{ibeaconid,jdbcType=BIGINT},#{mallId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerlong.model.IbeanconLog" >
+    insert into IBEACONLOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="deviceno != null" >
+        DEVICENO,
+      </if>
+      <if test="ibeaconno != null" >
+        IBEACONNO,
+      </if>
+      <if test="creadedDate != null" >
+        CREADED_DATE,
+      </if>
+      <if test="resource != null" >
+        RESOURCE,
+      </if>
+      <if test="ibeaconid != null" >
+        IBEACONID,
+      </if>
+      <if test="mallId != null" >
+        MALLID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceno != null" >
+        #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="ibeaconno != null" >
+        #{ibeaconno,jdbcType=VARCHAR},
+      </if>
+      <if test="creadedDate != null" >
+        #{creadedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resource != null" >
+        #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="ibeaconid != null" >
+        #{ibeaconid,jdbcType=BIGINT},
+      </if>
+      <if test="mallId != null" >
+        #{mallId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerlong.model.IbeanconLog" >
+    update IBEACONLOG
+    <set >
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceno != null " >
+        DEVICENO = #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="ibeaconno != null" >
+        IBEACONNO = #{ibeaconno,jdbcType=VARCHAR},
+      </if>
+      <if test="creadedDate != null" >
+        CREADED_DATE = #{creadedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resource != null" >
+        RESOURCE = #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="ibeaconid != null" >
+        IBEACONID = #{ibeaconid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerlong.model.IbeanconLog" >
+    update IBEACONLOG
+    set MOBILE = #{mobile,jdbcType=VARCHAR},
+      DEVICENO = #{deviceno,jdbcType=VARCHAR},
+      IBEACONNO = #{ibeaconno,jdbcType=VARCHAR},
+      CREADED_DATE = #{creadedDate,jdbcType=TIMESTAMP},
+      RESOURCE = #{resource,jdbcType=VARCHAR},
+      IBEACONID = #{ibeaconid,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <!--滚动屏临时需求方法-->
+  <select id="selectInfoStreamList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from IBEACONLOG
+    ORDER BY CREADED_DATE DESC  limit 2
+  </select>
+  
+  
+  <select id="selectIbeanconLogList" resultMap="IbeaDataResultMap" parameterType="com.powerlong.common.Paginator" >
+        select 
+			t.ID AS ID, t.MOBILE AS MOBILE, t.DEVICENO AS DEVICENO, t.IBEACONNO AS IBEACONNO, t.CREADED_DATE AS CREADED_DATE, 
+			t.RESOURCE AS RESOURCE, t.IBEACONID AS IBEACONID,t.MALLId AS MALLId,t1.AREA  AS AREA,t2.USER_NAME
+		from IBEACONLOG t left join  IBEANCONINFO t1 on  t.IBEACONID=t1.ID
+		     left join  databox_user t2 on t.MOBILE=t2.MOBILE
+        where  1=1 
+        <if test="params.mallId != null and params.mallId!=''" >
+            AND t.MALLID = #{params.mallId,jdbcType=BIGINT}
+        </if>
+        <if test="params.mobile != null and params.mobile != ''" >
+            AND t.MOBILE like CONCAT('%',#{params.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.deviceno != null and params.deviceno != ''" >
+            AND t.DEVICENO like CONCAT('%',#{params.deviceno,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.ibeaconno != null and params.ibeaconno != ''" >
+            AND t.IBEACONNO like CONCAT('%',#{params.ibeaconno,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.area != null and params.area != ''" >
+            AND t1.AREA = #{params.area,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test="params.startTime != null" >
+            <![CDATA[
+            AND t.CREADED_DATE >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND t.CREADED_DATE <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if> -->
+        ORDER BY t.CREADED_DATE DESC
+        limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectIbeanconLogCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+        select 
+		count(*)
+        from IBEACONLOG t left join  IBEANCONINFO t1 on  t.IBEACONID=t1.ID
+		     left join  databox_user t2 on t.MOBILE=t2.MOBILE
+        where  1=1 
+        <if test="params.mallId != null and params.mallId!=''" >
+            AND t.MALLID = #{params.mallId,jdbcType=BIGINT}
+        </if>
+        <if test="params.mobile != null and params.mobile != ''" >
+            AND t.MOBILE like CONCAT('%',#{params.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.deviceno != null and params.deviceno != ''" >
+            AND t.DEVICENO like CONCAT('%',#{params.deviceno,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.ibeaconno != null and params.ibeaconno != ''" >
+            AND t.IBEACONNO like CONCAT('%',#{params.ibeaconno,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.area != null and params.area != ''" >
+            AND t1.AREA = #{params.area,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test="params.startTime != null" >
+            <![CDATA[
+            AND t.CREADED_DATE >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND t.CREADED_DATE <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if> -->
+  </select>
+
+    <select id="selectIbeanconLogToMonthCount" resultType="java.lang.Long" parameterType="com.powerlong.model.IbeanconLog" >
+        select count(DISTINCT t.IBEACONNO) from IBEACONLOG t where date_format(t.CREADED_DATE, '%Y-%m') = date_format(#{creadedDate,jdbcType=TIMESTAMP}, '%Y-%m')
+    </select>
+
+    <!-- 获取当月客流量 -->
+    <select id="selectIbeanconLogToMonthCountByDay" resultMap="BaseResultMap" parameterType="com.powerlong.model.IbeanconLog" >
+        SELECT
+        COUNT(DISTINCT t.ID) AS ID,
+        DATE_FORMAT(t.CREADED_DATE, "%Y") AS MOBILE,
+        DATE_FORMAT(t.CREADED_DATE, "%m") AS deviceno,
+        DATE_FORMAT(t.CREADED_DATE, "%d") AS IBEACONNO
+        FROM
+        IBEACONLOG t
+        WHERE
+        date_format(t.CREADED_DATE, '%Y-%m') = date_format(#{creadedDate,jdbcType=TIMESTAMP}, '%Y-%m')
+        GROUP BY
+        date_format(t.CREADED_DATE, '%Y-%m-%d')
+    </select>
+
+  
+</mapper>

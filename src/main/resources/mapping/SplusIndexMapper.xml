@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.powerlong.mapper.SplusIndexMapper" >
+  <resultMap id="BaseResultMap" type="com.powerlong.vo.DataBoxIndexVo" >
+        <result column="ReceiptNum" property="receiptnum" jdbcType="VARCHAR" />
+        <result column="CPTId" property="cptid" jdbcType="VARCHAR" />
+        <result column="TSDate" property="tsdate" jdbcType="TIMESTAMP" />
+        <result column="TotalAmount" property="totalamount" jdbcType="DOUBLE" />
+        <result column="QRCode" property="qrcode" jdbcType="VARCHAR" />
+        <result column="MERCHANTNAME" property="merchantname" jdbcType="VARCHAR" />
+        <result column="TSId" property="tsid" jdbcType="VARCHAR" />
+        <result column="ProductIf" property="productif" jdbcType="VARCHAR" />
+        <result column="MerchantId" property="merchantid" jdbcType="VARCHAR" />
+        <result column="EnterAmount" property="enteramount" jdbcType="DOUBLE" />
+        <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="SEX" property="sex" jdbcType="CHAR" />
+        <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+        <result column="IDE" property="ide" jdbcType="VARCHAR" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+        <result column="MLEVEL" property="mlevel" jdbcType="VARCHAR" />
+        <result column="MEMBER_NO" property="memberNo" jdbcType="VARCHAR" />
+        <result column="MALL_ID" property="mallId" jdbcType="BIGINT" />
+        <result column="MALL_NAME" property="mallName" jdbcType="VARCHAR" />
+        <result column="ImageUrl" property="imageurl" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 分页查询获取总数 selectSplusIndexDataCount -->
+    <select id="selectSplusIndexDataCount" resultType="java.lang.Long" parameterType="com.powerlong.common.Paginator" >
+        select
+        COUNT(t.ReceiptNum)
+        FROM t_receipt t , databox_user d,t_posmonitor p
+        where t.QRCode = d.QRCODE AND t.CPTId = p.CPTID
+        <if test="params.mallId != null" >
+            AND d.mall_id = #{params.mallId,jdbcType=BIGINT}
+        </if>
+        <if test="params.minAmount != null" >
+            <![CDATA[
+            AND t.TotalAmount >= #{params.minAmount,jdbcType=DOUBLE}
+          ]]>
+        </if>
+        <if test="params.maxAmount != null" >
+            <![CDATA[
+              AND t.TotalAmount <= #{params.maxAmount,jdbcType=DOUBLE}
+            ]]>
+        </if>
+        <if test="params.merchantid != null" >
+            AND t.MerchantId = #{params.merchantid,jdbcType=VARCHAR}
+        </if>
+        <if test="params.merchantname != null" >
+            AND p.MERCHANTNAME = #{params.merchantname,jdbcType=VARCHAR}
+        </if>
+        <if test="params.startTime != null" >
+            <![CDATA[
+            AND t.TSDate >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND t.TSDate <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.consumer != null" >
+            AND (d.USER_NAME LIKE CONCAT('%',#{params.consumer,jdbcType=VARCHAR},'%')
+            	or d.MOBILE LIKE CONCAT('%',#{params.consumer,jdbcType=VARCHAR},'%') )
+        </if>
+    </select>
+
+    <sql id="splus_index_list" >
+        p.MERCHANTNAME, t.ReceiptNum, t.CPTId, t.TSDate, t.TotalAmount, t.QRCode, t.TSId, t.MerchantId, t.EnterAmount,
+        t.ProductIf,d.USER_ID, d.USER_NAME, d.SEX, d.BIRTHDAY, d.MOBILE, d.IDE, d.EMAIL, d.ADDRESS,d.MLEVEL, d.MEMBER_NO,
+        d.MALL_ID,d.MALL_NAME,t.ImageUrl
+    </sql>
+
+    <!-- 分页查询 selectDataBoxAndUserData -->
+    <select id="selectSplusIndexData" resultMap="BaseResultMap" parameterType="com.powerlong.common.Paginator" >
+        select
+          <include refid="splus_index_list" />
+        FROM t_receipt t , databox_user d,t_posmonitor p
+        where t.QRCode = d.QRCODE AND t.CPTId = p.CPTID
+        <if test="params.mallId != null" >
+            AND d.mall_id = #{params.mallId,jdbcType=BIGINT}
+        </if>
+        <if test="params.minAmount !=   null" >
+            <![CDATA[
+            AND t.TotalAmount >= #{params.minAmount,jdbcType=DOUBLE}
+          ]]>
+        </if>
+        <if test="params.maxAmount != null" >
+            <![CDATA[
+              AND t.TotalAmount <= #{params.maxAmount,jdbcType=DOUBLE}
+            ]]>
+        </if>
+        <if test="params.merchantid != null" >
+            AND t.MerchantId = #{params.merchantid,jdbcType=VARCHAR}
+        </if>
+        <if test="params.merchantname != null" >
+            AND p.MERCHANTNAME = #{params.merchantname,jdbcType=VARCHAR}
+        </if>
+        <if test="params.startTime != null" >
+            <![CDATA[
+            AND t.TSDate >= #{params.startTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.endTime != null" >
+            <![CDATA[
+            AND t.TSDate <= #{params.endTime,jdbcType=TIMESTAMP}
+            ]]>
+        </if>
+        <if test="params.consumer != null" >
+            AND (d.USER_NAME LIKE CONCAT('%',#{params.consumer,jdbcType=VARCHAR},'%')
+            	OR d.MOBILE LIKE CONCAT('%',#{params.consumer,jdbcType=VARCHAR},'%') )
+        </if>
+        ORDER BY t.TSDate DESC
+        limit #{offset,jdbcType=BIGINT},#{itemsPerPage,jdbcType=BIGINT}
+    </select>
+
+    <!--滚动屏临时需求方法-->
+    <select id="selectInfoStreamList" resultMap="BaseResultMap">
+        select
+        <include refid="splus_index_list" />
+        from t_receipt t , databox_user d,t_posmonitor p
+        where t.ReceiptNum = d.RECEIPTNUM AND t.CPTId = p.CPTID ORDER BY d.CREATED_DATE DESC  limit 1
+    </select>
+</mapper>
